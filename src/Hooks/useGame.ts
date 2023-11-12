@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import apiClient from "../Services/api-client";
-// set the type of the game
-interface Game {
+// set the type of the game, we need to expore it to use it elsewhere
+export interface Game {
   id: number;
   name: string;
+  background_image: string;
 }
 // set the type of the response of the api
 interface FetchGamesResponse {
