@@ -11,7 +11,7 @@ const GameCard = ({ game }: Props) => {
   let color =
     game.metacritic > 75 ? "green" : game.metacritic > 60 ? "yellow" : "";
   return (
-    <Card width='300px' borderRadius={10} overflow="hidden">
+    <Card >
       <Image src={getCroppedImageUrl(game.background_image)} />
       <CardBody>
         <Heading fontSize={"2xl"}>{game.name}</Heading>
