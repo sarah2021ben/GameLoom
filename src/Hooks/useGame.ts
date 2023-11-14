@@ -5,7 +5,6 @@ export interface Platform {
   id: number;
   name: string;
   slug: string;
-  
 }
 export interface Game {
   id: number;
@@ -21,14 +20,20 @@ interface FetchGamesResponse {
 }
 const useGame = () => {
   const [games, setGames] = useState<Game[]>([]); // to set the response of the API
-  const [error, setError] = useState("");// to retrieve the error
+  const [error, setError] = useState(""); // to retrieve the error
+  const [isLoading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     apiClient
       .get<FetchGamesResponse>("/games")
-      .then((res) => setGames(res.data.results))
-      .catch((err) => setError(err.message));
+      .then((res) => {
+        setGames(res.data.results), setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        setError(err.message)});
   }, []);
-  return { games, error }; // we will get the games and error and use it in the componenet
+  return { games, error, isLoading }; // we will get the games and error and use it in the componenet
 };
 
 export default useGame;
