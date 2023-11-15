@@ -15,8 +15,8 @@ function App() {
             "aside main"`,
       }}
       templateColumns={{
-        base:'1fr', // the coluom strach and take all the  available space
-        lg:'200px 1fr',
+        base: "1fr", // the coluom strach and take all the  available space
+        lg: "200px 1fr",
       }}
     >
       <GridItem area={"nav"}>
@@ -24,12 +24,15 @@ function App() {
       </GridItem>
       <Show above="lg">
         <GridItem area={"aside"} paddingX={5}>
-          <GenreList onSelectedGenre={(genre) => setSelectedGenre(genre)}/>
+          <GenreList
+            onSelectedGenre={(genre) => setSelectedGenre(genre)}
+            selectedGenre={selectedGenre}
+          />
         </GridItem>
       </Show>
 
       <GridItem area={"main"}>
-        <GameGrid selectedGenre={selectedGenre}/>
+        <GameGrid selectedGenre={selectedGenre} />
       </GridItem>
     </Grid>
   );
