@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import apiClient from "../Services/api-client";
 
-export interface Platforms {
+export interface Platform {
   id: number;
   name: string;
   slug: string;
@@ -9,11 +9,11 @@ export interface Platforms {
 
 interface FetchPlatformsResponse {
   count: number;
-  results: Platforms[];
+  results: Platform[];
 }
 
 const usePlatform = () => {
-  const [platforms, setPlatform] = useState<Platforms[]>([]); // to set the response of the API
+  const [platforms, setPlatform] = useState<Platform[]>([]); // to set the response of the API
   const [error, setError] = useState(""); // to retrieve the error
   const [isLoading, setLoading] = useState(false);
   useEffect(() => {

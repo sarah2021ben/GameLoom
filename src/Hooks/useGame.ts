@@ -19,14 +19,19 @@ interface FetchGamesResponse {
   count: number;
   results: Game[];
 }
-const useGame = (selectedGenre:Genre| null ) => {
+const useGame = (
+  selectedGenre: Genre | null,
+  selectedPlatform: Platform | null,
+) => {
   const [games, setGames] = useState<Game[]>([]); // to set the response of the API
   const [error, setError] = useState(""); // to retrieve the error
   const [isLoading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
     apiClient
-      .get<FetchGamesResponse>("/games", { params: {genres: selectedGenre?.id }})
+      .get<FetchGamesResponse>("/games", {
+        params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id },
+      })
       .then((res) => {
         setGames(res.data.results), setLoading(false);
       })
@@ -34,7 +39,7 @@ const useGame = (selectedGenre:Genre| null ) => {
         setLoading(false);
         setError(err.message);
       });
-  }, [selectedGenre?.id]);
+  }, [selectedGenre?.id, selectedPlatform?.id]);
   return { games, error, isLoading }; // we will get the games and error and use it in the componenet
 };
 
