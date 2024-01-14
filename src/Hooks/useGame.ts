@@ -28,6 +28,7 @@ const useGame = (
   const [isLoading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
+    // setGames([]);
     apiClient
       .get<FetchGamesResponse>("/games", {
         params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id },
