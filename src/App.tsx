@@ -20,7 +20,7 @@ function App() {
       }}
       templateColumns={{
         base: "1fr", // the coluom strach and take all the  available space
-        lg: "200px 1fr",
+        lg: "250px 1fr",
       }}
     >
       <GridItem area={"nav"}>
