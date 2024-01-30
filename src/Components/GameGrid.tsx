@@ -9,16 +9,19 @@ interface Props {
   selectedGenre: Genre | null;
   selectedPlatform: Platform | null;
   selectedOrder: string | null;
+  searchItem: string | null;
 }
 const GameGrid = ({
   selectedGenre,
   selectedPlatform,
   selectedOrder,
+  searchItem,
 }: Props) => {
   const { games, error, isLoading } = useGame(
     selectedGenre,
     selectedPlatform,
     selectedOrder,
+    searchItem,
   ); // we have used the custum hook to keep our comp clean and no api call in it
   const skeletons = [1, 2, 3, 4, 5, 6];
   return (

@@ -7,13 +7,15 @@ import { Genre } from "./Hooks/useGenres";
 import PlatformSelector from "./Components/PlatformSelector";
 import { Platform } from "./Hooks/usePlatform";
 import SortSelector from "./Components/SortSelector";
+import './App.css';
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null); // because selectedGenre can be an array or can be nothing we have to this or 
   const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
   const [selectedOrder, setSelectedOrder] = useState<string| null>(null);
+  const [searchItem, setSearchItem] = useState<string | null>(null);
 
-  console.log("selectedOrder", selectedOrder);
+  console.log("searchItem", searchItem);
   return (
     <Grid
       templateAreas={{
@@ -27,7 +29,7 @@ function App() {
       }}
     >
       <GridItem area={"nav"}>
-        <Navbar />
+        <Navbar onSearchItem={(searchItem) => setSearchItem(searchItem)} />
       </GridItem>
       <Show above="lg">
         <GridItem area={"aside"} paddingX={5}>
@@ -54,6 +56,7 @@ function App() {
           selectedGenre={selectedGenre}
           selectedPlatform={selectedPlatform}
           selectedOrder={selectedOrder}
+          searchItem={searchItem}
         />
       </GridItem>
     </Grid>

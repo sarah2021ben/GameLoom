@@ -25,6 +25,7 @@ const useGame = (
   selectedGenre: Genre | null,
   selectedPlatform: Platform | null,
   selectedOrder: string | null,
+  searchItem: string | null,
 ) => {
   const [games, setGames] = useState<Game[]>([]); // to set the response of the API
   const [error, setError] = useState(""); // to retrieve the error
@@ -38,6 +39,7 @@ const useGame = (
           genres: selectedGenre?.id,
           platforms: selectedPlatform?.id,
           ordering: selectedOrder,
+          search: searchItem,
         },
       })
       .then((res) => {
@@ -47,7 +49,7 @@ const useGame = (
         setLoading(false);
         setError(err.message);
       });
-  }, [selectedGenre?.id, selectedPlatform?.id, selectedOrder]);
+  }, [selectedGenre?.id, selectedPlatform?.id, selectedOrder, searchItem]);
   return { games, error, isLoading }; // we will get the games and error and use it in the componenet
 };
 
