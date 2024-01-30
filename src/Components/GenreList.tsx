@@ -21,7 +21,9 @@ const GenreList = ({ onSelectedGenre, selectedGenre }: Props) => {
 
   return (
     <>
-      <Heading paddingBottom={5}>Genres</Heading>
+      <Heading as="h3" size="md" paddingBottom={5}>
+        Genres
+      </Heading>
       <List>
         {genres.map((genre) => (
           <ListItem key={genre.id} paddingY="5px">
