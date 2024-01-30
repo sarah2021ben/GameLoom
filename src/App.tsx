@@ -8,6 +8,7 @@ import PlatformSelector from "./Components/PlatformSelector";
 import { Platform } from "./Hooks/usePlatform";
 import SortSelector from "./Components/SortSelector";
 import './App.css';
+import GameHeading from "./Components/GameHeading";
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null); // because selectedGenre can be an array or can be nothing we have to this or 
@@ -41,6 +42,10 @@ function App() {
       </Show>
 
       <GridItem area={"main"}>
+        <GameHeading
+          selectedGenre={selectedGenre}
+          selectedPlatform={selectedPlatform}
+        />
         <HStack spacing={5} paddingLeft={8}>
           <PlatformSelector
             onSelectedPlatform={(platform) => setSelectedPlatform(platform)}
