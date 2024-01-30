@@ -9,7 +9,7 @@ interface Props {
 function GameHading({ selectedGenre, selectedPlatform }: Props) {
   return (
     <Heading as="h1" paddingLeft={8} paddingBottom={8}>
-      {`${selectedPlatform?.name} ${selectedGenre?.name} Games`}
+      {`${selectedPlatform?.name || ''} ${selectedGenre?.name || ''} Games`}
     </Heading>
   );
 }
