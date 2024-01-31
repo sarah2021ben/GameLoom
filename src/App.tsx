@@ -9,12 +9,14 @@ import { Platform } from "./Hooks/usePlatform";
 import SortSelector from "./Components/SortSelector";
 import './App.css';
 import GameHeading from "./Components/GameHeading";
+import LayoutButtons from "./Components/layoutButtons";
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null); // because selectedGenre can be an array or can be nothing we have to this or 
   const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
   const [selectedOrder, setSelectedOrder] = useState<string| null>(null);
   const [searchItem, setSearchItem] = useState<string | null>(null);
+  const [selectedLayout, setSelectedLayout] = useState<string | null>('grid');
 
   console.log("searchItem", searchItem);
   return (
@@ -46,14 +48,19 @@ function App() {
           selectedGenre={selectedGenre}
           selectedPlatform={selectedPlatform}
         />
-        <HStack spacing={5} paddingLeft={8}>
-          <PlatformSelector
-            onSelectedPlatform={(platform) => setSelectedPlatform(platform)}
-            selectedPlatform={selectedPlatform}
-          />
-          <SortSelector
-            onSelectedOrder={(sortOrder) => setSelectedOrder(sortOrder)}
-            selectedOrder={selectedOrder}
+        <HStack justifyContent="space-between">
+          <HStack spacing={5} paddingLeft={8}>
+            <PlatformSelector
+              onSelectedPlatform={(platform) => setSelectedPlatform(platform)}
+              selectedPlatform={selectedPlatform}
+            />
+            <SortSelector
+              onSelectedOrder={(sortOrder) => setSelectedOrder(sortOrder)}
+              selectedOrder={selectedOrder}
+            />
+          </HStack>
+          <LayoutButtons
+            onSelectedLayout={(layout) => setSelectedLayout(layout)}
           />
         </HStack>
 
@@ -62,6 +69,7 @@ function App() {
           selectedPlatform={selectedPlatform}
           selectedOrder={selectedOrder}
           searchItem={searchItem}
+          selectedLayout={selectedLayout}
         />
       </GridItem>
     </Grid>
