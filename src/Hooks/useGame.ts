@@ -50,6 +50,7 @@ const useGame = (
         setError(err.message);
       });
   }, [selectedGenre?.id, selectedPlatform?.id, selectedOrder, searchItem]);
+  console.log(games);
   return { games, error, isLoading }; // we will get the games and error and use it in the componenet
 };
 
