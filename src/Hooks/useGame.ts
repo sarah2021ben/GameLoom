@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import apiClient from "../Services/api-client";
 import { Genre } from "./useGenres";
+import { useQuery } from "@tanstack/react-query";
 // set the type of the game, we need to expore it to use it elsewhere
 export interface Platform {
   id: number;
@@ -27,7 +28,36 @@ const useGame = (
   selectedOrder: string | null,
   searchItem: string | null,
 ) => {
-  const [games, setGames] = useState<Game[]>([]); // to set the response of the API
+  const {
+    data: games,
+    isLoading,
+    error,
+  } = useQuery<Game[], Error>({
+    queryKey: [
+      "games",
+      selectedGenre,
+      selectedPlatform,
+      selectedOrder,
+      searchItem,
+    ],
+    queryFn: () =>
+      apiClient
+        .get<FetchGamesResponse>("/games", {
+          params: {
+            genres: selectedGenre?.id,
+            parent_platforms: selectedPlatform?.id,
+            ordering: selectedOrder,
+            search: searchItem,
+          },
+        })
+        .then((res) => res.data.results),
+  });
+
+  /**********************************************/
+  /**This is the method used before react query**/
+  /**********************************************/
+
+  /*   const [games, setGames] = useState<Game[]>([]); // to set the response of the API
   const [error, setError] = useState(""); // to retrieve the error
   const [isLoading, setLoading] = useState(false);
   useEffect(() => {
@@ -49,8 +79,8 @@ const useGame = (
         setLoading(false);
         setError(err.message);
       });
-  }, [selectedGenre?.id, selectedPlatform?.id, selectedOrder, searchItem]);
-  console.log(games);
+  }, [selectedGenre?.id, selectedPlatform?.id, selectedOrder, searchItem]); */
+
   return { games, error, isLoading }; // we will get the games and error and use it in the componenet
 };
 

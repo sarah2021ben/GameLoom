@@ -28,7 +28,7 @@ const GameGrid = ({
   ); // we have used the custum hook to keep our comp clean and no api call in it
   console.log(selectedLayout);
   const skeletons = [1, 2, 3, 4, 5, 6];
-  if (error) return <Text>{error}</Text>;
+  if (error) return <Text>{error.message}</Text>;
   return (
     <SimpleGrid columns={selectedLayout ==="grid" ? { sm: 1, md: 2, lg: 3 } : { lg: 1 }} spacing={3} padding={10}>
       {isLoading
