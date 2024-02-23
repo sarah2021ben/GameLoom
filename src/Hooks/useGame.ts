@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import apiClient from "../Services/api-client";
 import { Genre } from "./useGenres";
 import { useQuery } from "@tanstack/react-query";
+import { Platform } from "./usePlatform";
 // set the type of the game, we need to expore it to use it elsewhere
-export interface Platform {
-  id: number;
-  name: string;
-  slug: string;
-}
+
 
 
 export interface Game {
