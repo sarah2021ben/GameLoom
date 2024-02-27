@@ -11,11 +11,11 @@ export interface Genre {
   games_count: number;
 }
 // we can use this interface to fetch all the data response from the api without specify the results (res) => res.data.results
-interface FetchGenresResponse {
+/* interface FetchGenresResponse {
   count: number;
   results: Genre[];
 }
-
+ */
 const useGenres = () => {
   const { data, error, isLoading } = useQuery<Genre[], Error>({
     queryKey: ["genres"],

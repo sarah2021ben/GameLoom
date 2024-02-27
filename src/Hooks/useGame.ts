@@ -1,11 +1,10 @@
 // import { useEffect, useState } from "react";
 import apiClient from "../Services/api-client";
 import { Genre } from "./useGenres";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { FetchResponse } from "../utils/interfaces";
 import { Platform } from "./usePlatform";
 // set the type of the game, we need to expore it to use it elsewhere
-
-
 
 export interface Game {
   id: number;
@@ -15,21 +14,15 @@ export interface Game {
   metacritic: number;
 }
 // set the type of the response of the api
-interface FetchGamesResponse {
-  count: number;
-  results: Game[];
-}
+
 const useGame = (
   selectedGenre: Genre | null,
   selectedPlatform: Platform | null,
   selectedOrder: string | null,
   searchItem: string | null,
 ) => {
-  const {
-    data: games,
-    isLoading,
-    error,
-  } = useQuery<Game[], Error>({
+  const { data , isLoading, error, isFetchingNextPage, fetchNextPage, hasNextPage } = useInfiniteQuery<FetchResponse<Game>, Error>({
+    // we use useInfiniteQuery instead of useQuery because we want infinite games in the page
     queryKey: [
       "games",
       selectedGenre,
@@ -37,17 +30,22 @@ const useGame = (
       selectedOrder,
       searchItem,
     ],
-    queryFn: () =>
+    queryFn: ({ pageParam = 1 }) =>
       apiClient
-        .get<FetchGamesResponse>("/games", {
+        .get("/games", {
           params: {
             genres: selectedGenre?.id,
             parent_platforms: selectedPlatform?.id,
             ordering: selectedOrder,
             search: searchItem,
+            page: pageParam,
           },
         })
-        .then((res) => res.data.results),
+        .then((res) => res.data),
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.next ? allPages.length + 1 : undefined;
+    },
+    initialPageParam: 1,
   });
 
   /**********************************************/
@@ -61,7 +59,7 @@ const useGame = (
     setLoading(true);
     // setGames([]);
     apiClient
-      .get<FetchGamesResponse>("/games", {
+      .get<FetchResponse>("/games", {
         params: {
           genres: selectedGenre?.id,
           platforms: selectedPlatform?.id,
@@ -78,7 +76,14 @@ const useGame = (
       });
   }, [selectedGenre?.id, selectedPlatform?.id, selectedOrder, searchItem]); */
 
-  return { games, error, isLoading }; // we will get the games and error and use it in the componenet
+  return {
+    data,
+    error,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  }; // we will get the games and error and use it in the componenet
 };
 
 export default useGame;
