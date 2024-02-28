@@ -80,7 +80,6 @@ const useGame = (
     data,
     error,
     isLoading,
-    isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
   }; // we will get the games and error and use it in the componenet
