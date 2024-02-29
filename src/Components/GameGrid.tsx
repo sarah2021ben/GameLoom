@@ -5,30 +5,29 @@ import useGame from "../Hooks/useGame";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-import { Genre } from "../Hooks/useGenres";
-import { Platform } from "../Hooks/usePlatform";
+// import { Genre } from "../Hooks/useGenres";
+// import { Platform } from "../Hooks/usePlatform";
 import GameList from "./GameList";
 interface Props {
-  selectedGenre: Genre | null;
-  selectedPlatform: Platform | null;
+  selectedGenreId?: number;
+  selectedPlatformId?: number;
   selectedOrder: string | null;
   searchItem: string | null;
   selectedLayout: string | null;
 }
 const GameGrid = ({
-  selectedGenre,
-  selectedPlatform,
+  selectedGenreId,
+  selectedPlatformId,
   selectedOrder,
   searchItem,
   selectedLayout,
 }: Props) => {
-  const {
-    data,
-    error,
-    isLoading,
-    fetchNextPage,
-    hasNextPage,
-  } = useGame(selectedGenre, selectedPlatform, selectedOrder, searchItem); // we have used the custum hook to keep our comp clean and no api call in it
+  const { data, error, isLoading, fetchNextPage, hasNextPage } = useGame(
+    selectedOrder,
+    searchItem,
+    selectedGenreId,
+    selectedPlatformId,
+  ); // we have used the custum hook to keep our comp clean and no api call in it
   console.log(selectedLayout);
   const skeletons = [1, 2, 3, 4, 5, 6];
   if (error) return <Text>{error.message}</Text>;

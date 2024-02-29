@@ -74,10 +74,9 @@ function App() {
                     onSelectedLayout={(layout) => setSelectedLayout(layout)}
                   />
                 </HStack>
-
                 <GameGrid
-                  selectedGenre={selectedGenre}
-                  selectedPlatform={selectedPlatform}
+                  selectedGenreId={selectedGenre?.id}
+                  selectedPlatformId={selectedPlatform?.id}
                   selectedOrder={selectedOrder}
                   searchItem={searchItem}
                   selectedLayout={selectedLayout}
