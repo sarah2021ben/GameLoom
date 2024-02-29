@@ -1,6 +1,7 @@
 // import { useEffect, useState } from "react";
 import apiClient from "../Services/api-client";
 import { useQuery } from "@tanstack/react-query";
+import ms from "ms";
 
 export interface Platform {
   id: number;
@@ -24,6 +25,7 @@ const usePlatform = () => {
       apiClient
         .get<FetchPlatformsResponse>("/platforms/lists/parents")
         .then((res) => res.data.results),
+    staleTime: ms("1d"), // 24H
   });
   /**********************************************/
   /**This is the method used instead of  react query**/

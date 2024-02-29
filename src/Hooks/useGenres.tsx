@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import apiClient from "../Services/api-client";
 import { useQuery } from "@tanstack/react-query";
+import ms from "ms";
 import axios from "axios";
 
 export interface Genre {
@@ -21,7 +22,7 @@ const useGenres = () => {
     queryKey: ["genres"],
     queryFn: () => apiClient.get("/genres").then((res) => res.data.results),
     // staleTime is a time parameter used to specify after what time the data become old in our situation genres doesn't change much so we set it to 24H
-    staleTime: 24 * 60 * 60 * 1000, // 24H
+    staleTime: ms("1d"), // 24H
     // this is an initial data that we can give to the cache genres is a js file that contain initial genres, we use this to improve the performance of the app
     // initialData: genres,
   });

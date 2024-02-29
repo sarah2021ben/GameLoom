@@ -2,6 +2,7 @@
 import apiClient from "../Services/api-client";
 // import { Genre } from "./useGenres";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import ms from "ms";
 import { FetchResponse } from "../utils/interfaces";
 import { Platform } from "./usePlatform";
 // set the type of the game, we need to expore it to use it elsewhere
@@ -47,6 +48,7 @@ const useGame = (
         return lastPage.next ? allPages.length + 1 : undefined;
       },
       initialPageParam: 1,
+      staleTime: ms("1d"), // 24H
     });
 
   /**********************************************/
