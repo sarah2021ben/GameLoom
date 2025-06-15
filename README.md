@@ -13,6 +13,13 @@ This project is designed to demonstrate front-end development skills, including:
 
 ---
 
+## 🔗 Live Demo
+
+Check out the deployed app here:  
+👉 [GameLoom Live on Vercel](https://game-loom.vercel.app/)
+
+---
+
 ## 🚀 Tech Stack
 
 This project uses a modern front-end development stack:
