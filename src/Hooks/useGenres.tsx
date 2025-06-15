@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import apiClient from "../Services/api-client";
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
-import axios from "axios";
 
 export interface Genre {
   id: number;
