@@ -40,6 +40,7 @@ const GameGrid = ({
       loader={
         <Spinner size="xl" color="white" thickness="4px" speed="0.65s" mx="auto" />
       }
+      style={{ overflow: "hidden" }} // To prevent scroll bar from showing
       endMessage={
         <p style={{ textAlign: "center" }}>
           <b>Yay! You have seen it all</b>

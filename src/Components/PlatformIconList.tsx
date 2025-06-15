@@ -9,7 +9,7 @@ import {
 import { MdPhoneIphone } from "react-icons/md";
 import { SiNintendo } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
-import { HStack, Icon, Text } from "@chakra-ui/react";
+import { HStack, Icon } from "@chakra-ui/react";
 import { Platform } from "../Hooks/usePlatform";
 import { IconType } from "react-icons";
 
@@ -17,7 +17,7 @@ interface Props {
   platforms: Platform[];
 }
 const PlatformIconList = ({ platforms }: Props) => {
-  const iconMap:{[key: string]:IconType} = {
+  const iconMap:{[key: string]:IconType} = {// Mapping platform slugs to icons and using IconType from react-icons to ensure type safety We ave to use IconType because react-icons doesn't have a type for the icons
     pc: FaWindows,
     playstation: FaPlaystation,
     xbox: FaXbox,
