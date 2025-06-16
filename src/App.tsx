@@ -12,14 +12,23 @@ import "./App.css";
 import GameHeading from "./Components/GameHeading";
 import LayoutButtons from "./Components/layoutButtons";
 import GameDetails from "./Components/GameDetails";
+export interface GameQuery {
+  genre: Genre | null;
+  platform: Platform | null;
+  order: string | null;
+  searchItem: string | null;
+}
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null); // because selectedGenre can be an array or can be nothing we have to this or
-  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(
+  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+  // instead of using seperate state for each filter, we can use a single state for the selected genre, platform, and order
+ /*  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null); // because selectedGenre can be an array or can be nothing we have to this or
+   const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(
     null,
   );
   const [selectedOrder, setSelectedOrder] = useState<string | null>(null);
-  const [searchItem, setSearchItem] = useState<string | null>(null);
+  const [searchItem, setSearchItem] = useState<string | null>(null); */
+  // we can use this to set the layout of the game grid
   const [selectedLayout, setSelectedLayout] = useState<string | null>("grid");
 
   return (
@@ -35,7 +44,7 @@ function App() {
       }}
     >
       <GridItem area={"nav"}>
-        <Navbar onSearchItem={(searchItem) => setSearchItem(searchItem)} />
+        <Navbar onSearchItem={(searchItem) => setGameQuery({...gameQuery, searchItem})} />
       </GridItem>
       <Routes>
         <Route
@@ -45,29 +54,28 @@ function App() {
               <Show above="lg">
                 <GridItem area={"aside"} paddingX={5}>
                   <GenreList
-                    onSelectedGenre={(genre) => setSelectedGenre(genre)}
-                    selectedGenre={selectedGenre}
+                    onSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
+                    selectedGenre={gameQuery.genre}
                   />
                 </GridItem>
               </Show>
               <GridItem area={"main"}>
                 <GameHeading
-                  selectedGenre={selectedGenre}
-                  selectedPlatform={selectedPlatform}
+                  gameQuery={gameQuery}
                 />
                 <HStack justifyContent="space-between">
                   <HStack spacing={5} paddingLeft={8}>
                     <PlatformSelector
                       onSelectedPlatform={(platform) =>
-                        setSelectedPlatform(platform)
+                        setGameQuery({ ...gameQuery, platform })
                       }
-                      selectedPlatform={selectedPlatform}
+                      selectedPlatform={gameQuery.platform}
                     />
                     <SortSelector
-                      onSelectedOrder={(sortOrder) =>
-                        setSelectedOrder(sortOrder)
+                      onSelectedOrder={(order) =>
+                        setGameQuery({...gameQuery, order})
                       }
-                      selectedOrder={selectedOrder}
+                      selectedOrder={gameQuery.order}
                     />
                   </HStack>
                   <LayoutButtons
@@ -75,10 +83,7 @@ function App() {
                   />
                 </HStack>
                 <GameGrid
-                  selectedGenreId={selectedGenre?.id}
-                  selectedPlatformId={selectedPlatform?.id}
-                  selectedOrder={selectedOrder}
-                  searchItem={searchItem}
+                  gameQuery={gameQuery}
                   selectedLayout={selectedLayout}
                 />
               </GridItem>

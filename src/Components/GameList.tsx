@@ -17,7 +17,7 @@ const GameList = ({ game }: Props) => {
         <Image
           src={getCroppedImageUrl(game.background_image)}
           objectFit="cover"
-          maxW={{ base: "300px" }}
+          maxW={{ base: "160px", lg: "300px" }}
         />
         <Stack>
           <CardBody>

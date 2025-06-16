@@ -5,6 +5,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import ms from "ms";
 import { FetchResponse } from "../utils/interfaces";
 import { Platform } from "./usePlatform";
+import { GameQuery } from "../App";
 // set the type of the game, we need to expore it to use it elsewhere
 
 export interface Game {
@@ -17,29 +18,26 @@ export interface Game {
 // set the type of the response of the api
 
 const useGame = (
-  selectedOrder: string | null,
-  searchItem: string | null,
-  selectedGenreId?: number,
-  selectedPlatformId?: number,
+  gameQuery: GameQuery
 ) => {
   const { data, isLoading, error, fetchNextPage, hasNextPage } =
     useInfiniteQuery<FetchResponse<Game>, Error>({
       // we use useInfiniteQuery instead of useQuery because we want infinite games in the page
       queryKey: [
         "games",
-        selectedGenreId,
-        selectedPlatformId,
-        selectedOrder,
-        searchItem,
+        gameQuery.genre?.id,
+        gameQuery.platform?.id,
+        gameQuery.order,
+        gameQuery.searchItem,
       ],
       queryFn: ({ pageParam = 1 }) =>
         apiClient
           .get("/games", {
             params: {
-              genres: selectedGenreId,
-              parent_platforms: selectedPlatformId,
-              ordering: selectedOrder,
-              search: searchItem,
+              genres: gameQuery.genre?.id,
+              parent_platforms: gameQuery.platform?.id,
+              ordering: gameQuery.order,
+              search: gameQuery.searchItem,
               page: pageParam,
             },
           })

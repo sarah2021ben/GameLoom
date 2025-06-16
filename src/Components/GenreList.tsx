@@ -16,7 +16,6 @@ interface Props {
 }
 const GenreList = ({ onSelectedGenre, selectedGenre }: Props) => {
   const { data, isLoading, error } = useGenres();
-  console.log("genres", data);
   if (error) return null;
   if (isLoading) return <Spinner />; // showing spinner when fetching the list of the GenreList
 
