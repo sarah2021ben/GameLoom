@@ -5,18 +5,15 @@ import useGame from "../Hooks/useGame";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-// import { Genre } from "../Hooks/useGenres";
-// import { Platform } from "../Hooks/usePlatform";
 import GameList from "./GameList";
-import { GameQuery } from "../App";
+import useGameQueryStore from "../store";
 interface Props {
-  gameQuery: GameQuery;
   selectedLayout: string | null;
 }
 const GameGrid = ({
-  gameQuery,
   selectedLayout,
 }: Props) => {
+  const gameQuery = useGameQueryStore((state) => state.gameQuery); // we have used the zustand store to get the gameQuery
   const { data, error, isLoading, fetchNextPage, hasNextPage } = useGame(
    gameQuery
   ); // we have used the custum hook to keep our comp clean and no api call in it

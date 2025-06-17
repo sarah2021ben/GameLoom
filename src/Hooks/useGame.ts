@@ -1,11 +1,9 @@
-// import { useEffect, useState } from "react";
 import apiClient from "../Services/api-client";
-// import { Genre } from "./useGenres";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import ms from "ms";
 import { FetchResponse } from "../utils/interfaces";
 import { Platform } from "./usePlatform";
-import { GameQuery } from "../App";
+import { GameQuery } from "../store";
 // set the type of the game, we need to expore it to use it elsewhere
 
 export interface Game {
@@ -25,18 +23,18 @@ const useGame = (
       // we use useInfiniteQuery instead of useQuery because we want infinite games in the page
       queryKey: [
         "games",
-        gameQuery.genre?.id,
-        gameQuery.platform?.id,
-        gameQuery.order,
+        gameQuery.genreId,
+        gameQuery.platformId,
+        gameQuery.sortOrder,
         gameQuery.searchItem,
       ],
       queryFn: ({ pageParam = 1 }) =>
         apiClient
           .get("/games", {
             params: {
-              genres: gameQuery.genre?.id,
-              parent_platforms: gameQuery.platform?.id,
-              ordering: gameQuery.order,
+              genres: gameQuery.genreId,
+              parent_platforms: gameQuery.platformId,
+              ordering: gameQuery.sortOrder,
               search: gameQuery.searchItem,
               page: pageParam,
             },
