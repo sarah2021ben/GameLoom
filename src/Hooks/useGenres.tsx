@@ -1,14 +1,8 @@
 import apiClient from "../Services/api-client";
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
+import { Genre } from "../utils/interfaces";
 
-export interface Genre {
-  id: number;
-  name: string;
-  slug: string;
-  image_background: string;
-  games_count: number;
-}
 // we can use this interface to fetch all the data response from the api without specify the results (res) => res.data.results
 /* interface FetchGenresResponse {
   count: number;
@@ -45,7 +39,7 @@ const useGenres = () => {
       });
   }, []); */
 
-  return { data , error, isLoading }; // we will get the games and error and use it in the componenet
+  return { data, error, isLoading }; // we will get the games and error and use it in the componenet
 };
 
 export default useGenres;

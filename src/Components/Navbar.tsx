@@ -3,11 +3,9 @@ import logo from "../assets/logo.webp";
 import ColorModeSwitch from "./ColorModeSwitch";
 import InputSearch from "./InputSearch";
 
-
-
 const Navbar = () => {
   return (
-    <HStack padding="15px">
+    <HStack marginBottom={5}>
       <Image src={logo} boxSize="60px" />
       <InputSearch />
       <ColorModeSwitch />

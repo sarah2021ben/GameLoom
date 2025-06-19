@@ -1,21 +1,11 @@
 import apiClient from "../Services/api-client";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import ms from "ms";
-import { FetchResponse } from "../utils/interfaces";
-import { Platform } from "./usePlatform";
+import { FetchResponse, Game } from "../utils/interfaces";
 import { GameQuery } from "../store";
-// set the type of the game, we need to expore it to use it elsewhere
-
-export interface Game {
-  id: number;
-  name: string;
-  background_image: string;
-  parent_platforms: { platform: Platform }[];
-  metacritic: number;
-}
 // set the type of the response of the api
 
-const useGame = (
+const useGames = (
   gameQuery: GameQuery
 ) => {
   const { data, isLoading, error, fetchNextPage, hasNextPage } =
@@ -84,4 +74,4 @@ const useGame = (
   }; // we will get the games and error and use it in the componenet
 };
 
-export default useGame;
+export default useGames;

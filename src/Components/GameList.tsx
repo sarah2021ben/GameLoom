@@ -1,5 +1,5 @@
 import { Card, CardBody } from "@chakra-ui/card";
-import { Game } from "../Hooks/useGame";
+import { Game } from "../utils/interfaces";
 import { Badge, Heading, Image, Stack } from "@chakra-ui/react";
 import PlatformIconList from "./PlatformIconList";
 import getCroppedImageUrl from "../Services/image-url";
@@ -12,7 +12,7 @@ const GameList = ({ game }: Props) => {
   let color =
     game.metacritic > 75 ? "green" : game.metacritic > 60 ? "yellow" : "";
   return (
-    <Link to={`/${game.id}`}>
+    <Link to={`/games/${game.slug}`}>
       <Card direction={{ base: "row" }} variant="outline">
         <Image
           src={getCroppedImageUrl(game.background_image)}
