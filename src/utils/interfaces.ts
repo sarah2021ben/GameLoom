@@ -11,6 +11,9 @@ export interface Game {
   parent_platforms: { platform: Platform; }[];
   metacritic: number;
   slug: string;
+  description_raw: string;
+  genres: Genre[];
+  publishers: Publisher[];
 }export interface Genre {
   id: number;
   name: string;
@@ -26,5 +29,22 @@ export interface Platform {
 export interface FetchPlatformsResponse {
   count: number;
   results: Platform[];
+}
+export interface Publisher {
+  id: number;
+  name: string;
+}
+export interface Trailer {
+  id: number;
+  name: string;
+  preview: string;
+  data: { 480: string; max: string };
+
+}
+export interface Screenshot {
+  id: number;
+  image: string;
+  width: number;
+  height: number;
 }
 

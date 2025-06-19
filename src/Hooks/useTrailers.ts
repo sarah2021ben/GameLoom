@@ -1,20 +1,20 @@
 import apiClient from "../Services/api-client";
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
-import { Game } from "../utils/interfaces";
+import { FetchResponse, Trailer } from "../utils/interfaces";
 
-const useGameDetails = (
-  slug: string
+const useTrailers = (
+  gameId: number
 ) => {
   const { data, isLoading, error } =
-    useQuery<Game, Error>({
+    useQuery<FetchResponse<Trailer>, Error>({
       queryKey: [
-        "games",
-         slug
+        "trailers",
+         gameId
       ],
       queryFn: () =>
         apiClient
-          .get(`/games/${slug}`)
+          .get(`/games/${gameId}/movies`)
           .then((res) => res?.data),
       staleTime: ms("1d"), // 24H
     });
@@ -28,4 +28,4 @@ const useGameDetails = (
   }; 
 };
 
-export default useGameDetails;
+export default useTrailers;
