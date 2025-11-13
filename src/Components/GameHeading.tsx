@@ -8,13 +8,13 @@ function GameHading() {
   const platformId = useGameQueryStore((s) => s.gameQuery.platformId);
   const selectedPlatform = platforms?.find((p) => p.id === platformId);
 
-  const {data :genres } = useGenres();
+  const { data: genres } = useGenres();
   const genreId = useGameQueryStore((s) => s.gameQuery.genreId);
   const selectedGenre = genres?.find((p) => p.id === genreId);
 
   return (
-    <Heading as="h1" paddingLeft={8} paddingBottom={8}>
-       {`${selectedPlatform?.name || ''} ${selectedGenre?.name || ''} Games`} 
+    <Heading as="h1" paddingLeft={{ base: 2, md: 5, xl: 8 }} paddingBottom={8}>
+      {`${selectedPlatform?.name || ""} ${selectedGenre?.name || ""} Games`}
     </Heading>
   );
 }

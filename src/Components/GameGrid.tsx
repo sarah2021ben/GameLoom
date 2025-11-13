@@ -55,7 +55,7 @@ const GameGrid = ({ selectedLayout }: Props) => {
             selectedLayout === "grid" ? { sm: 1, md: 2, lg: 3 } : { lg: 1 }
           }
           spacing={3}
-          padding={10}
+          padding={{ base: 2, md: 5, xl: 10 }}
         >
           {isLoading
             ? skeletons.map((skeleton) => (

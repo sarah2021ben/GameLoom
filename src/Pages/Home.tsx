@@ -43,7 +43,11 @@ function Home() {
       <GridItem area={"main"}>
         <GameHeading />
         <HStack justifyContent="space-between">
-          <HStack spacing={5} paddingLeft={8}>
+          <HStack
+            spacing={{ base: 2, md: 5 }}
+            paddingLeft={{ base: 2, md: 5, xl: 8 }}
+            flexWrap={{ base: "wrap", md: "nowrap" }}
+          >
             <PlatformSelector />
             <SortSelector />
           </HStack>

@@ -4,9 +4,13 @@ interface Props {
   onSelectedLayout: (layout: string) => void;
 }
 
-function layoutButtons({ onSelectedLayout }:Props) {
+function layoutButtons({ onSelectedLayout }: Props) {
   return (
-    <HStack spacing={2} paddingRight={10}>
+    <HStack
+      spacing={2}
+      paddingRight={10}
+      display={{ base: "none", md: "flex" }}
+    >
       <IconButton
         aria-label="grid"
         icon={<BsGrid3X3GapFill />}
